@@ -9,9 +9,6 @@ spec:
   - name: "8080"
     port: 8080
     targetPort: 8080
-  - name: "8030"
-    port: 8030
-    targetPort: 8030
   selector:
     service: reverseproxy
   type: LoadBalancer

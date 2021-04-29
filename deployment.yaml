@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: reverseproxy
-  labels:
-    service: reverseproxy
 spec:
   replicas: 1
   selector:
@@ -26,7 +24,23 @@ spec:
             memory: "1024Mi"
             cpu: "500m"       
         ports:
-        - containerPort: 80
+        - containerPort: 3000
       restartPolicy: Always
 
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: reverseproxy
+  name: reverseproxy
+spec:
+  ports:
+  - name: "3000"
+    port: 3000
+    targetPort: 3000
+  selector:
+    service: reverseproxy
+  type: LoadBalancer
 
